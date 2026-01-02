@@ -5,11 +5,11 @@ O **Assim Saúde** é um **sistema web de gestão administrativa para clínicas 
 O objetivo do projeto é demonstrar, de forma prática, organizada e profissional, conhecimentos em:
 
 - Backend com **Python + Flask**
-- API REST
+- **API REST**
 - Banco de dados **MySQL**
 - Frontend desacoplado
 - **Docker e Docker Compose**
-- Organização de código e arquitetura em camadas
+- Organização de código e **arquitetura em camadas**
 
 ---
 
@@ -19,26 +19,26 @@ Atualmente, o sistema oferece:
 
 - ✅ Cadastro, listagem, edição e exclusão de **Cargos**
 - ✅ Cadastro, listagem, edição e exclusão de **Funcionários**
-- ✅ Relacionamento entre Funcionários e Cargos
+- ✅ Relacionamento entre **Funcionários** e **Cargos**
 - ✅ Inicialização automática do banco de dados
-- ✅ Consumo da API via Frontend, Postman ou cURL
+- ✅ Consumo da API via **Frontend**, **Postman** ou **cURL**
 
-> ⚠️ Funcionalidades como **Pacientes, Consultas e Autenticação** estão planejadas, mas **não fazem parte do escopo desta avaliação técnica**.
+> ⚠️ Funcionalidades como **Pacientes**, **Consultas** e **Autenticação** estão planejadas, mas **não fazem parte do escopo desta avaliação técnica**.
 
 ---
 
-# 🚀 Guia Completo — Como Testar o Sistema
+# 🚀 Guia Completo — Como Executar o Projeto (SEM ERROS)
 
 ## 1️⃣ Pré-requisitos
 
-Certifique-se de ter os seguintes softwares instalados:
+Instale os softwares abaixo:
 
 - **Git**
 - **Docker**
 - **Docker Compose**
 - **Visual Studio Code**
 
-Validação rápida no terminal:
+Verificação rápida:
 
 ```bash
 git --version
@@ -50,74 +50,75 @@ docker compose version
 
 ## 2️⃣ Clonar o repositório e abrir no VS Code (Windows — PowerShell)
 
-> ✅ **Recomendado:** usar o terminal padrão do VS Code (**PowerShell**)  
-> ⚠️ No PowerShell, **não utilize `&&`**
+✅ Utilize o terminal padrão do VS Code (**PowerShell**)  
+⚠️ **Não use `&&` no PowerShell**
 
-Execute **os comandos abaixo, um de cada vez**:
-
-### 2.1 Clonar o repositório já no local recomendado
+### 2.1 Clonar o repositório no local recomendado
 
 ```powershell
 git clone https://github.com/RodrigoTechieX/Assim-saude.git "$env:USERPROFILE\Documents\Projetos\Assim-saude"
 ```
 
-📁 O projeto será clonado em:
-```
-Documentos/Projetos/Assim-saude
-```
-
----
-
-### 2.2 Abrir o projeto no VS Code
+### 2.2 Entrar na pasta correta (**PASSO OBRIGATÓRIO**)
 
 ```powershell
-code "$env:USERPROFILE\Documents\Projetos\Assim-saude"
+cd "$env:USERPROFILE\Documents\Projetos\Assim-saude"
 ```
 
-📌 Após esse comando:
-- A pasta aparecerá automaticamente no VS Code
-- O projeto estará pronto para execução
+🔍 Confirme que o arquivo `docker-compose.yml` existe:
+
+```powershell
+dir docker-compose.yml
+```
+
+Se o arquivo aparecer, você está no diretório correto.
+
+### 2.3 Abrir o projeto no VS Code
+
+```powershell
+code .
+```
 
 ---
 
-## ℹ️ Observação (Git Bash ou Linux/macOS)
-
-Caso esteja usando **Git Bash, Linux ou macOS**, é possível usar:
+### ℹ️ Observação (Git Bash / Linux / macOS)
 
 ```bash
 git clone https://github.com/RodrigoTechieX/Assim-saude.git ~/Projetos/Assim-saude
-code ~/Projetos/Assim-saude
+cd ~/Projetos/Assim-saude
+ls docker-compose.yml
+code .
 ```
 
 ---
 
-## 3️⃣ Subir todo o ambiente com Docker
+## 3️⃣ Subir o ambiente com Docker (SEM ERRO)
 
-Com o projeto aberto no VS Code, execute:
+⚠️ Execute este comando **somente** dentro da pasta que contém o `docker-compose.yml`.
 
 ```bash
 docker compose up -d
 ```
 
-⏳ Na primeira execução, aguarde cerca de **10 a 20 segundos**.
+⏳ Aguarde **10 a 20 segundos** na primeira execução.
 
-### Serviços criados
+### Containers criados
 
-| Serviço | Função | Porta |
-|------|------|------|
-| MySQL | Banco de Dados | 3306 |
-| Flask API | Backend | 5000 |
-| Nginx | Frontend | 8080 |
+| Serviço   | Função        | Porta |
+|----------|---------------|-------|
+| MySQL    | Banco de Dados| 3306  |
+| Flask API | Backend       | 5000  |
+| Nginx    | Frontend      | 8080  |
 
 ---
 
-## 4️⃣ Verificar status dos containers
+## 4️⃣ Verificar containers
 
 ```bash
 docker compose ps
 ```
 
-Todos os serviços devem estar com status **Up**.
+**Status esperado:** `Up`
 
 ---
 
@@ -135,24 +136,14 @@ http://localhost:5000
 
 ---
 
-# 🧪 Teste Funcional do Sistema
+## 🧪 Teste Funcional da API
 
-## 🧱 Passo 1 — Criar um Cargo
+### 🧱 Criar Cargo (obrigatório)
 
-Funcionários dependem de cargos.  
-Este deve ser o **primeiro teste**.
-
-### Endpoint
-```
+```http
 POST /cargos
 ```
 
-### URL completa
-```
-http://localhost:5000/cargos
-```
-
-### Exemplo de payload
 ```json
 {
   "nome": "Enfermeiro",
@@ -163,19 +154,12 @@ http://localhost:5000/cargos
 
 ---
 
-## 👨‍⚕️ Passo 2 — Criar um Funcionário
+### 👨‍⚕️ Criar Funcionário
 
-### Endpoint
-```
+```http
 POST /funcionarios
 ```
 
-### URL completa
-```
-http://localhost:5000/funcionarios
-```
-
-### Exemplo de payload
 ```json
 {
   "nome": "João Silva",
@@ -186,11 +170,9 @@ http://localhost:5000/funcionarios
 }
 ```
 
-> 📌 O `cargo_id` deve existir previamente.
-
 ---
 
-## 📋 Passo 3 — Listar Funcionários
+### 📋 Listar Funcionários
 
 ```bash
 curl http://localhost:5000/funcionarios
@@ -198,7 +180,7 @@ curl http://localhost:5000/funcionarios
 
 ---
 
-## 🗄️ Passo 4 — Conferir dados no banco (opcional)
+## 🗄️ Conferir dados no banco (opcional)
 
 ```bash
 docker exec -it assim_db mysql -u root -proot
@@ -212,7 +194,7 @@ SELECT * FROM funcionarios;
 
 ---
 
-## ♻️ Recriar o banco do zero (se necessário)
+## ♻️ Resetar o ambiente (se necessário)
 
 ```bash
 docker compose down -v
@@ -223,8 +205,8 @@ docker compose up -d
 
 ## 📁 Estrutura do Projeto
 
-```
-assim-saude/
+```text
+Assim-saude/
 ├── backend/
 ├── frontend/
 ├── database/
@@ -236,7 +218,8 @@ assim-saude/
 
 ## 🧑‍💻 Autor
 
-**Rodrigo Ferreira da Silva Filho**  
+**Rodrigo Ferreira da Silva Filho**
+
 📧 contato.rodrigo.tech@gmail.com  
 🔗 https://www.linkedin.com/in/rodrigo-ferreira-325527272/
 
@@ -244,4 +227,4 @@ assim-saude/
 
 ## 🏁 Licença
 
-Este projeto está licenciado sob a licença **MIT**.
+Este projeto está licenciado sob a **Licença MIT**.
