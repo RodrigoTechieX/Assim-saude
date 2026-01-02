@@ -36,6 +36,7 @@ Certifique-se de ter os seguintes softwares instalados:
 - **Git**
 - **Docker**
 - **Docker Compose**
+- **Visual Studio Code**
 
 Validação rápida no terminal:
 
@@ -47,18 +48,46 @@ docker compose version
 
 ---
 
-## 2️⃣ Clonar o repositório e abrir no VS Code
+## 2️⃣ Clonar o repositório e abrir no VS Code (Windows — PowerShell)
 
-Execute o comando abaixo **diretamente no terminal do VS Code**:
+> ✅ **Recomendado:** usar o terminal padrão do VS Code (**PowerShell**)  
+> ⚠️ No PowerShell, **não utilize `&&`**
 
-```bash
-git clone https://github.com/RodrigoTechieX/Assim-saude.git "%USERPROFILE%\Documents\Projetos\Assim-saude" && code "%USERPROFILE%\Documents\Projetos\Assim-saude"
+Execute **os comandos abaixo, um de cada vez**:
+
+### 2.1 Clonar o repositório já no local recomendado
+
+```powershell
+git clone https://github.com/RodrigoTechieX/Assim-saude.git "$env:USERPROFILE\Documents\Projetos\Assim-saude"
 ```
 
-📌 Esse comando irá:
-- Clonar o repositório
-- Criar a pasta `Documentos/Projetos/Assim-saude`
-- Abrir automaticamente o projeto no **VS Code**
+📁 O projeto será clonado em:
+```
+Documentos/Projetos/Assim-saude
+```
+
+---
+
+### 2.2 Abrir o projeto no VS Code
+
+```powershell
+code "$env:USERPROFILE\Documents\Projetos\Assim-saude"
+```
+
+📌 Após esse comando:
+- A pasta aparecerá automaticamente no VS Code
+- O projeto estará pronto para execução
+
+---
+
+## ℹ️ Observação (Git Bash ou Linux/macOS)
+
+Caso esteja usando **Git Bash, Linux ou macOS**, é possível usar:
+
+```bash
+git clone https://github.com/RodrigoTechieX/Assim-saude.git ~/Projetos/Assim-saude
+code ~/Projetos/Assim-saude
+```
 
 ---
 
