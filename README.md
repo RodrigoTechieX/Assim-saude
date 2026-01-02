@@ -44,12 +44,19 @@ https://www.docker.com/products/docker-desktop/
 
 ### ▶️ Passo a Passo
 
-#### 1️⃣ Clonar o repositório
+#### 1️⃣ Clonar o repositório e abrir no VS Code
 
 ```bash
 git clone https://github.com/RodrigoTechieX/Projeto-Assim-saude.git
 cd Projeto-Assim-saude
+code .
 ```
+
+> 💡 O comando `code .` abre a pasta do projeto diretamente no **VS Code**.  
+> Caso não funcione, abra manualmente a pasta **Projeto-Assim-saude** pelo menu  
+> **File → Open Folder** do VS Code.
+
+---
 
 #### 2️⃣ Subir toda a aplicação com Docker
 
