@@ -2,7 +2,7 @@
 
 O **Assim Saúde** é um **sistema web de gestão administrativa para clínicas e unidades de saúde**, desenvolvido como **avaliação técnica**.
 
-O projeto tem como objetivo demonstrar, de forma prática e organizada, conhecimentos em:
+O objetivo do projeto é demonstrar, de forma prática, organizada e profissional, conhecimentos em:
 
 - Backend com **Python + Flask**
 - API REST
@@ -13,9 +13,9 @@ O projeto tem como objetivo demonstrar, de forma prática e organizada, conhecim
 
 ---
 
-## 🎯 Escopo do Sistema (o que está implementado)
+## 🎯 Escopo do Sistema (Implementado)
 
-Atualmente, o sistema permite:
+Atualmente, o sistema oferece:
 
 - ✅ Cadastro, listagem, edição e exclusão de **Cargos**
 - ✅ Cadastro, listagem, edição e exclusão de **Funcionários**
@@ -23,21 +23,22 @@ Atualmente, o sistema permite:
 - ✅ Inicialização automática do banco de dados
 - ✅ Consumo da API via Frontend, Postman ou cURL
 
-> ⚠️ Funcionalidades como **Pacientes, Consultas e Autenticação** estão planejadas, mas **não fazem parte do escopo atual da avaliação**.
+> ⚠️ Funcionalidades como **Pacientes, Consultas e Autenticação** estão planejadas, mas **não fazem parte do escopo desta avaliação técnica**.
 
 ---
 
-# 🚀 GUIA COMPLETO — COMO TESTAR O SISTEMA
+# 🚀 Guia Completo — Como Testar o Sistema
 
-## 1️⃣ Pré-requisitos obrigatórios
+## 1️⃣ Pré-requisitos
 
-Antes de iniciar, verifique se você possui instalado:
+Certifique-se de ter os seguintes softwares instalados:
 
 - **Git**
 - **Docker**
 - **Docker Compose**
 
-Validação rápida:
+Validação rápida no terminal:
+
 ```bash
 git --version
 docker --version
@@ -46,40 +47,48 @@ docker compose version
 
 ---
 
-## 2️⃣ Clonar o repositório
+## 2️⃣ Clonar o repositório e abrir no VS Code
+
+Execute o comando abaixo **diretamente no terminal do VS Code**:
 
 ```bash
-git clone https://github.com/RodrigoTechieX/Assim-saude.git
-cd Assim-saude
+git clone https://github.com/RodrigoTechieX/Assim-saude.git "%USERPROFILE%\Documents\Projetos\Assim-saude" && code "%USERPROFILE%\Documents\Projetos\Assim-saude"
 ```
+
+📌 Esse comando irá:
+- Clonar o repositório
+- Criar a pasta `Documentos/Projetos/Assim-saude`
+- Abrir automaticamente o projeto no **VS Code**
 
 ---
 
 ## 3️⃣ Subir todo o ambiente com Docker
 
+Com o projeto aberto no VS Code, execute:
+
 ```bash
 docker compose up -d
 ```
 
-Na primeira execução, aguarde cerca de **10 a 20 segundos** para inicialização completa.
+⏳ Na primeira execução, aguarde cerca de **10 a 20 segundos**.
 
 ### Serviços criados
 
 | Serviço | Função | Porta |
 |------|------|------|
-| MySQL | Banco de dados | 3306 |
+| MySQL | Banco de Dados | 3306 |
 | Flask API | Backend | 5000 |
 | Nginx | Frontend | 8080 |
 
 ---
 
-## 4️⃣ Verificar se os containers estão ativos
+## 4️⃣ Verificar status dos containers
 
 ```bash
 docker compose ps
 ```
 
-Todos devem estar com status **Up**.
+Todos os serviços devem estar com status **Up**.
 
 ---
 
@@ -97,12 +106,12 @@ http://localhost:5000
 
 ---
 
-# 🧪 TESTE FUNCIONAL DO SISTEMA (PASSO A PASSO)
+# 🧪 Teste Funcional do Sistema
 
-## 🧱 PASSO 1 — Criar um Cargo (obrigatório)
+## 🧱 Passo 1 — Criar um Cargo
 
 Funcionários dependem de cargos.  
-Este **deve ser o primeiro teste**.
+Este deve ser o **primeiro teste**.
 
 ### Endpoint
 ```
@@ -114,7 +123,7 @@ POST /cargos
 http://localhost:5000/cargos
 ```
 
-### Payload de exemplo
+### Exemplo de payload
 ```json
 {
   "nome": "Enfermeiro",
@@ -125,7 +134,7 @@ http://localhost:5000/cargos
 
 ---
 
-## 👨‍⚕️ PASSO 2 — Criar um Funcionário
+## 👨‍⚕️ Passo 2 — Criar um Funcionário
 
 ### Endpoint
 ```
@@ -137,7 +146,7 @@ POST /funcionarios
 http://localhost:5000/funcionarios
 ```
 
-### Payload de exemplo
+### Exemplo de payload
 ```json
 {
   "nome": "João Silva",
@@ -148,12 +157,11 @@ http://localhost:5000/funcionarios
 }
 ```
 
-> 📌 **Importante:**  
-> O `cargo_id` deve existir na tabela `cargos`.
+> 📌 O `cargo_id` deve existir previamente.
 
 ---
 
-## 📋 PASSO 3 — Listar Funcionários
+## 📋 Passo 3 — Listar Funcionários
 
 ```bash
 curl http://localhost:5000/funcionarios
@@ -161,7 +169,7 @@ curl http://localhost:5000/funcionarios
 
 ---
 
-## 🗄️ PASSO 4 — Conferir dados no banco (opcional)
+## 🗄️ Passo 4 — Conferir dados no banco (opcional)
 
 ```bash
 docker exec -it assim_db mysql -u root -proot
@@ -207,4 +215,4 @@ assim-saude/
 
 ## 🏁 Licença
 
-Licença **MIT**.
+Este projeto está licenciado sob a licença **MIT**.
