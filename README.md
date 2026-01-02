@@ -1,188 +1,178 @@
-# Projeto-Assim-saude
+# 🏥 Projeto Assim Saúde — Sistema de Gestão Administrativa
 
-# 🏥 Assim Saúde — Sistema de Gestão de Saúde
+O **Projeto Assim Saúde** é uma aplicação web desenvolvida como **avaliação técnica**, com foco na **gestão administrativa de cargos e funcionários** no contexto de uma instituição de saúde.
 
-O **Assim Saúde** é um sistema completo para gestão de dados de pacientes, funcionários, cargos, consultas e muito mais.  
-Desenvolvido com **Flask (Python)** no backend, **MySQL** para persistência de dados e **HTML/CSS/JS + Nginx** no frontend,  
-ele visa proporcionar **controle, eficiência e clareza** na administração de clínicas e unidades de saúde.  
-Sistema desenvolvido para avaliação da empresa **Assim Saúde**.
+O sistema permite o **cadastro, listagem, edição e relacionamento entre cargos e funcionários**, utilizando uma arquitetura simples, organizada e facilmente extensível.
 
 ---
 
-## 🚀 Quickstart (Execução Rápida)
+## 🧩 Arquitetura
 
-Clone o repositório e suba todo o ambiente com Docker em um único comando:
+- **Backend:** Flask (Python) — API REST  
+- **Banco de Dados:** MySQL  
+- **Frontend:** HTML, CSS e JavaScript  
+- **Infraestrutura:** Docker e Docker Compose  
+
+> ⚠️ Funcionalidades como pacientes, consultas, autenticação e relatórios avançados **não fazem parte do escopo atual**. Estão previstas apenas como **evolução futura** do sistema.
+
+---
+
+## 🎯 Objetivo do Projeto
+
+- Demonstrar domínio em **Python com Flask**
+- Implementar **CRUD completo**
+- Trabalhar com **relacionamento entre tabelas**
+- Criar e consumir uma **API REST**
+- Utilizar **Docker e Docker Compose** para padronizar o ambiente
+- Permitir que qualquer pessoa consiga **executar e testar o projeto localmente**
+
+---
+
+## 🚀 Quickstart — Executar o Projeto em Qualquer Máquina
+
+### 📋 Pré-requisitos
+
+Antes de começar, você precisa ter instalado:
+
+- **Docker**
+- **Docker Compose**
+
+👉 Download:  
+https://www.docker.com/products/docker-desktop/
+
+---
+
+### ▶️ Passo a Passo
+
+#### 1️⃣ Clonar o repositório
 
 ```bash
 git clone https://github.com/RodrigoTechieX/Projeto-Assim-saude.git
-cd projeto-assim-saude
+cd Projeto-Assim-saude
+```
+
+#### 2️⃣ Subir toda a aplicação com Docker
+
+```bash
 docker compose up -d
 ```
 
-Após iniciar, acesse no navegador:  
-👉 [http://localhost:8080](http://localhost:8080)
+Aguarde alguns segundos até todos os containers iniciarem.
+
+---
+
+## 🌐 Acessos do Sistema
+
+Após a inicialização:
+
+- **Frontend (Interface Web):**  
+  http://localhost:8080  
+
+- **Backend (API Flask):**  
+  http://localhost:5000  
+
+---
+
+## 🖥️ Funcionalidades Disponíveis
+
+No frontend é possível:
+
+- Cadastrar cargos  
+- Cadastrar funcionários  
+- Relacionar funcionários a cargos  
+- Listar e visualizar registros cadastrados  
+- Editar informações já existentes  
+
+### 🔁 Fluxo sugerido para teste
+
+1. Criar um cargo  
+2. Criar um funcionário associado ao cargo  
+3. Listar os funcionários cadastrados  
 
 ---
 
 ## 🧩 Estrutura do Projeto
 
-```
-projeto-assim-saude/
+```text
+Projeto-Assim-saude/
 │
-├── backend/                 # API Flask (Python)
+├── backend/                 # API Flask
 │   ├── app.py
 │   ├── services/
-│   └── ...
+│   └── requirements.txt
 │
-├── frontend/                # Interface do usuário (HTML/CSS/JS)
+├── frontend/                # Interface Web
 │   ├── index.html
 │   └── pages/
 │
 ├── database/
-│   └── script.sql           # Script de criação do banco
+│   └── script.sql           # Criação das tabelas
 │
-├── docker-compose.yml       # Orquestração dos containers
+├── docker-compose.yml       # Orquestração dos serviços
 └── README.md
 ```
 
 ---
 
-## 🐳 Configuração com Docker
+## 🐳 Docker — Serviços Criados
 
-O projeto já vem totalmente configurado para uso com Docker Compose.
+| Serviço            | Porta | Descrição          |
+|--------------------|-------|--------------------|
+| MySQL              | 3306  | Banco de dados     |
+| Backend Flask      | 5000  | API REST           |
+| Frontend (Nginx)   | 8080  | Interface Web      |
 
-### 🔧 Subir os containers
+---
+
+## 🧱 Banco de Dados
+
+O banco de dados é criado automaticamente na primeira execução do Docker, utilizando o arquivo:
+
+```text
+database/script.sql
+```
+
+### 🔐 Credenciais padrão
+
+- **Usuário:** root  
+- **Senha:** root  
+- **Banco:** assim_saude  
+- **Host:** db  
+- **Porta:** 3306  
+
+### 🔄 Recriar o banco do zero
 
 ```bash
+docker compose down -v
 docker compose up -d
 ```
 
-Isso criará os seguintes serviços:
-
-| Serviço | Imagem | Porta | Descrição |
-|----------|--------|--------|-----------|
-| **assim_db** | mysql:8.0 | 3306 | Banco de dados MySQL |
-| **assim_backend** | python:3.11 | 5000 | API Flask |
-| **assim_frontend** | nginx:alpine | 8080 | Frontend (HTML/CSS/JS) |
-
-### 🧱 Banco de Dados (MySQL)
-
-Por padrão, o banco é iniciado com as credenciais:
-
-```
-Usuário: root
-Senha: root
-Banco: assim_saude
-Host: db
-Porta: 3306
-```
-
-O arquivo `database/script.sql` é executado automaticamente **apenas na primeira criação** do container MySQL.
-
-> ⚠️ Caso já exista um volume anterior (`db_data`), o script **não será executado novamente**.  
-> Para recriar o banco do zero e rodar o script novamente:
->
-> ```bash
-> docker compose down -v
-> docker compose up -d
-> ```
-
 ---
 
-## ⚙️ Variáveis de Ambiente
+## 🧪 Como Testar a API
 
-As variáveis do backend Flask são configuradas automaticamente no `docker-compose.yml`,  
-mas caso queira rodar localmente sem Docker, crie um arquivo `.env` dentro da pasta `backend/`:
-
-```env
-DB_HOST=localhost
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=root
-DB_NAME=assim_saude
-FLASK_ENV=development
-```
-
----
-
-## 🧩 Estrutura do Banco de Dados
-
-```sql
--- cria DB (se ainda não existir)
-CREATE DATABASE IF NOT EXISTS assim_saude
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
-USE assim_saude;
-
--- cargos
-CREATE TABLE IF NOT EXISTS cargos (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  nome VARCHAR(255) NOT NULL,
-  salario DECIMAL(10,2) NOT NULL,
-  descricao TEXT,
-  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- funcionarios
-CREATE TABLE IF NOT EXISTS funcionarios (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  nome VARCHAR(255) NOT NULL,
-  data_nascimento DATE,
-  endereco TEXT,
-  cpf VARCHAR(14) NOT NULL UNIQUE,
-  email VARCHAR(255),
-  telefone VARCHAR(20),
-  cargo_id INT NOT NULL,
-  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (cargo_id) REFERENCES cargos(id) ON DELETE RESTRICT ON UPDATE CASCADE
-);
-
--- relatorios
-CREATE TABLE IF NOT EXISTS relatorios (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  titulo VARCHAR(255) NOT NULL,
-  descricao TEXT,
-  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-
--- índices
-CREATE INDEX idx_funcionarios_nome ON funcionarios(nome);
-CREATE INDEX idx_cargos_nome ON cargos(nome);
-
-```
-
----
-
-## 💻 Rodar o Frontend sem Docker (opcional)
-
-Caso queira testar o frontend diretamente:
+### 🔎 Listar funcionários
 
 ```bash
-cd frontend
-python -m http.server 8080
+curl http://localhost:5000/funcionarios
 ```
 
-E acesse: 👉 [http://localhost:8080](http://localhost:8080)
+### 🔎 Listar cargos
+
+```bash
+curl http://localhost:5000/cargos
+```
+
+Você também pode testar usando:
+
+- Postman  
+- Insomnia  
 
 ---
 
-## 🧠 Estrutura de Pastas do Backend (Flask)
+## 💻 Executar sem Docker (Opcional)
 
-```
-backend/
-│
-├── app.py                # Ponto principal da aplicação Flask
-├── services/
-│   ├── db.py             # Classe de conexão com MySQL
-│   ├── funcionarios.py   # CRUD de funcionários
-│   ├── cargos.py         # CRUD de cargos
-│   └── ...
-│
-└── requirements.txt      # Dependências do Python
-```
-
-Para rodar manualmente (fora do Docker):
+### ▶️ Backend
 
 ```bash
 cd backend
@@ -190,62 +180,42 @@ pip install -r requirements.txt
 flask run
 ```
 
----
+API disponível em:  
+http://localhost:5000  
 
-## 🧰 Comandos Úteis do Docker
-
-| Comando | Descrição |
-|----------|------------|
-| `docker compose up -d` | Sobe todos os serviços em segundo plano |
-| `docker compose down` | Para e remove containers |
-| `docker compose logs -f backend` | Acompanha logs do backend em tempo real |
-| `docker exec -it assim_db bash` | Acessa o container do MySQL |
-
----
-
-## 🧪 Testar a API (via cURL ou Postman)
+### ▶️ Frontend
 
 ```bash
-curl -X GET http://localhost:5000/funcionarios
+cd frontend
+python -m http.server 8080
 ```
 
-Exemplo de retorno esperado:
-
-```json
-[
-  {
-    "id": 1,
-    "nome": "João Silva",
-    "cpf": "123.456.789-00",
-    "email": "joao@assimsaude.com",
-    "cargo": "Enfermeiro"
-  }
-]
-```
+Interface disponível em:  
+http://localhost:8080  
 
 ---
 
-## 🩺 Tecnologias Utilizadas
+## 🛠 Tecnologias Utilizadas
 
-| Categoria | Tecnologias |
-|------------|--------------|
-| **Backend** | Python, Flask, PyMySQL |
-| **Banco de Dados** | MySQL |
-| **Frontend** | HTML5, CSS3, JavaScript, Bootstrap |
-| **Infraestrutura** | Docker, Docker Compose, Nginx |
-
----
-
-## 🧑‍💻 Autor
-
-**Rodrigo Ferreira da Silva Filho**  
-✉️ [contato.rodrigo.tech@gmail.com]<br>
-🔗 [https://www.linkedin.com/in/rodrigo-ferreira-325527272/]<br>
-📁 Projeto desenvolvido como parte da avaliação — Assim Saúde
+| Camada         | Tecnologias                  |
+|---------------|------------------------------|
+| Backend        | Python, Flask                |
+| Banco de Dados | MySQL                        |
+| Frontend       | HTML, CSS, JavaScript        |
+| Infraestrutura | Docker, Docker Compose       |
 
 ---
 
-## 🏁 Licença
+## 👨‍💻 Autor
 
-Este projeto é distribuído sob a licença **MIT**.  
-Sinta-se livre para usar, modificar e distribuir.
+**Rodrigo Ferreira da Silva Filho**
+
+📧 Email:  
+contato.rodrigo.tech@gmail.com  
+
+🔗 LinkedIn:  
+https://www.linkedin.com/in/rodrigo-ferreira-325527272/
+
+---
+
+Projeto desenvolvido como **avaliação técnica**.
